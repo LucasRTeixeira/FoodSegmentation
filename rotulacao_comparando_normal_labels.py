@@ -20,6 +20,8 @@ def iou_coef(y_true, y_pred):
     smooth = .001
     iou = (intersection + smooth) / (union + smooth)
     iou = np.mean(iou)
+    if iou <= 9.592633205077928e-07:
+        iou = 0.0
     return iou
 
 # Carregando as imagens filtradas
@@ -33,7 +35,8 @@ img_labels = np.array(img_labels)
 flatten_labels = img_labels.flatten()
 
 # Segmentação img normal
-segments = slic(img, compactness=25, n_segments=275, start_label=1, sigma=0.789999999)
+segments = slic(img, compactness=30, n_segments=100, start_label=1, sigma=0.78999, min_size_factor=0.3)
+#min size pode ser um parâmetro a se considerar, padrão = 0.5
 out1 = color.label2rgb(segments, img, kind='avg', bg_label=0)
 
 # Primeiro NCut
@@ -53,7 +56,7 @@ if threshold1 > 0:
 
 
 # Segmentação img labels
-segments_labels = slic(img_labels, compactness=25, n_segments=275, start_label=1, sigma=0.789999999)
+segments_labels = slic(img_labels, compactness=30, n_segments=100, start_label=1, sigma=0.78999, min_size_factor=0.3)
 
 # Primeiro NCut
 threshold1 = 0.001
@@ -153,17 +156,3 @@ precision_media = np.mean([prec for _, prec in precision_por_segmento])
 print(f'Media Jaccard por segmento: {jaccard_medio}')
 print(f'Media IoU por segmento: {iou_medio}')
 print(f'Media Precision por segmento: {precision_media}')
-
-fig, ax = plt.subplots(1, 3)
-
-ax[0].imshow(img)
-ax[0].set_title('Imagem Original')
-
-ax[1].imshow(out1)
-ax[1].set_title('Imagem modificada SLIC')
-
-ax[2].imshow(out2)
-ax[2].set_title('Imagem modificada NCUT')
-
-plt.tight_layout()
-plt.show()

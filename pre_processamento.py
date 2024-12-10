@@ -122,7 +122,7 @@ def criaMascara(img):
     img_contraste2 = enhancer.enhance(1.4)  # 3º melhor (em cinza)
     img_contraste3 = enhancer.enhance(1.5)  # 4º melhor (em cinza)
 
-    plotar_imagens(img_rgb , img, img_contraste0, img_contraste1, img_contraste2, img_contraste3, 'Contraste Aumentado 1.2' , 'Contraste Aumentado 1.3', 'Contraste Aumentado 1.4' , 'Contraste Aumentado 1.5')
+    #plotar_imagens(img_rgb , img, img_contraste0, img_contraste1, img_contraste2, img_contraste3, 'Contraste Aumentado 1.2' , 'Contraste Aumentado 1.3', 'Contraste Aumentado 1.4' , 'Contraste Aumentado 1.5')
 
     # Aplicando filtro de média
     img_media0 = ndimage.median_filter(img_contraste1, size=2)  # 4º melhor (em cinza)
@@ -140,7 +140,7 @@ def criaMascara(img):
     img_gaussian2 = ndimage.gaussian_filter(img_media2, sigma=1.5)  # 3º melhor (em cinza)
     img_gaussian3 = ndimage.gaussian_filter(img_media2, sigma=2)  # 4º melhor (em cinza)
 
-    plotar_imagens(img_rgb , img, img_gaussian0, img_gaussian1, img_gaussian2, img_gaussian3, 'Filtro gaussiano sigma 0.5', 'Filtro gaussiano sigma 1', 'Filtro gaussiano sigma 1.5', 'Filtro gaussiano sigma 2')
+    #plotar_imagens(img_rgb , img, img_gaussian0, img_gaussian1, img_gaussian2, img_gaussian3, 'Filtro gaussiano sigma 0.5', 'Filtro gaussiano sigma 1', 'Filtro gaussiano sigma 1.5', 'Filtro gaussiano sigma 2')
 
     ######################################################################################
 
@@ -182,14 +182,14 @@ def criaMascara(img):
     img_gabor3_limiar = np.where(img_gabor3 > gabor_thresh, img_gabor3, 0)
 
     # Plotando as imagens resultantes com o limiar aplicado
-    plotar_imagens(img_rgb , img, img_gabor0_limiar, img_gabor1_limiar, img_gabor2_limiar, img_gabor3_limiar, 'Gabor (0.7) com Limiar', 'Gabor (0.9) com Limiar', 'Gabor (1.1) com Limiar', 'Gabor (1.3) com Limiar')
+    #plotar_imagens(img_rgb , img, img_gabor0_limiar, img_gabor1_limiar, img_gabor2_limiar, img_gabor3_limiar, 'Gabor (0.7) com Limiar', 'Gabor (0.9) com Limiar', 'Gabor (1.1) com Limiar', 'Gabor (1.3) com Limiar')
 
     img_gabor0_morf = aplicar_morfologia(img_gabor0_limiar, operacao="closing", elemento_estruturante=2)
     img_gabor1_morf = aplicar_morfologia(img_gabor1_limiar, operacao="closing", elemento_estruturante=2)
     img_gabor2_morf = aplicar_morfologia(img_gabor2_limiar, operacao="closing", elemento_estruturante=2)
     img_gabor3_morf = aplicar_morfologia(img_gabor3_limiar, operacao="closing", elemento_estruturante=2)
 
-    plotar_imagens(img_rgb , img, img_gabor0_morf, img_gabor1_morf, img_gabor2_morf, img_gabor3_morf, 'Gabor (0.7) com Morfologia', 'Gabor (0.9) com Morfologia', 'Gabor (1.1) com Morfologia', 'Gabor (1.3) com Morfologia')
+    #plotar_imagens(img_rgb , img, img_gabor0_morf, img_gabor1_morf, img_gabor2_morf, img_gabor3_morf, 'Gabor (0.7) com Morfologia', 'Gabor (0.9) com Morfologia', 'Gabor (1.1) com Morfologia', 'Gabor (1.3) com Morfologia')
 
     ######################################################################################
     # Plotando a máscara final e os resultados intermediários
@@ -211,7 +211,7 @@ def criaMascara(img):
     print(f"IoU: {iou}, Dice: {dice}, MSE: {mse}")
     print(f"Rand Error: {rand_error}, Precision: {precision}, Recall: {recall}")
 
-    plotar_imagens(img_rgb, img, img_sobel_morf, img_gabor0_morf, mascara_original, img_gabor1_morf,
-                    'Sobel com Morfologia', 'Gabor com Morfologia', 'Mascara Final', 'IGNORAR')
+    #plotar_imagens(img_rgb, img, img_sobel_morf, img_gabor0_morf, mascara_original, img_gabor1_morf,
+    #                'Sobel com Morfologia', 'Gabor com Morfologia', 'Mascara Final', 'IGNORAR')
 
     return mascara_original
