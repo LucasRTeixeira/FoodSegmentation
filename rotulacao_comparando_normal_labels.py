@@ -27,6 +27,7 @@ def iou_coef(y_true, y_pred):
 # Carregando as imagens filtradas
 img = Image.open(images_dir / "imagem3.jpg")
 img_rgb = img
+img = pre_processamento_imagens.criaMascara(img_rgb)
 img = np.array(img)
 
 img_labels = Image.open(images_dir / "imagem3-labels-teste.jpg")
